@@ -7,6 +7,7 @@ CPP_SRCS += \
 ../CLattice.cpp \
 ../CObject.cpp \
 ../CSimulation.cpp \
+../SimulationParametersStruct.cpp \
 ../UtilityFunctions.cpp \
 ../main.cpp 
 
@@ -14,6 +15,7 @@ OBJS += \
 ./CLattice.o \
 ./CObject.o \
 ./CSimulation.o \
+./SimulationParametersStruct.o \
 ./UtilityFunctions.o \
 ./main.o 
 
@@ -21,6 +23,7 @@ CPP_DEPS += \
 ./CLattice.d \
 ./CObject.d \
 ./CSimulation.d \
+./SimulationParametersStruct.d \
 ./UtilityFunctions.d \
 ./main.d 
 

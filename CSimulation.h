@@ -9,26 +9,20 @@
 #define	CSIMULATION_H
 #include <vector>
 #include "CObject.h"
+#include "SimulationParametersStruct.cpp"
 using namespace std;
+
 
 class CSimulation {
 public:
-    CSimulation();
+    CSimulation(SimulationParameters *SimPar);
     virtual ~CSimulation();
 
-    void SetTimestep(float timestep) {
-        m_timestep = timestep;
-    }
-
-    float GetTimestep() const {
-        return m_timestep;
-    }
-
-    void update();
+    void run(ostream& debug_stream);
 
 
 private:
-    float m_timestep;
+    SimulationParameters* m_simPar;
     vector<CObject> objects;
 
 };

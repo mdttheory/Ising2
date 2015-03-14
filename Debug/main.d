@@ -1,5 +1,8 @@
-main.d: ../main.cpp ../CLattice.h ../CObject.h
+main.d: ../main.cpp ../SimulationParametersStruct.cpp ../CSimulation.h \
+ ../CObject.h
 
-../CLattice.h:
+../SimulationParametersStruct.cpp:
+
+../CSimulation.h:
 
 ../CObject.h:

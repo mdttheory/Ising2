@@ -6,47 +6,35 @@
  */
 
 #include <cstdlib>
-#include "CLattice.h"
+#include "SimulationParametersStruct.cpp"
+#include "CSimulation.h"
 #include <fstream>
 #include <streambuf>
 #include <iostream>
 #include <vector>
-#include "CObject.h"
 
 using namespace std;
+
+
 
 /*
  *
  */
 int main(int argc, char** argv) {
 
-	//CONSTANTS
-	const unsigned short WIDTH = 50;
-	const unsigned short HEIGHT = 70;
-		//output stream for debugging
-		streambuf * buf;
-		buf = cout.rdbuf();
-		ostream debug_stream(buf);
-		//constants that will be command line params
-		short MAXTIME = 100;
-		float TIMESTEP = 1;
-		//"calculated" constants
-		short MAXTIMESTEPS = short(MAXTIME/TIMESTEP);
+	//output stream for debugging
+	streambuf * buf;
+	buf = cout.rdbuf();
+	ostream debug_stream(buf);
+	//TODO allow for outputting to file
+	//TODO allow for command line parameters
 
-
-	vector<CObject> objects;
-	CLattice lattice(WIDTH,HEIGHT);
-	objects.push_back(lattice);
-
-	for(int t = 0; t<MAXTIME; t+=TIMESTEP)
-	{
-
-	}
-
-	lattice.print_all(debug_stream);
+	SimulationParameters* SimPar = new SimulationParameters();
+	CSimulation Simulation(SimPar);
+	Simulation.run(debug_stream);
 
 
 
-
+	delete SimPar;
     return 0;
 }

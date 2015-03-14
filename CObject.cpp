@@ -15,6 +15,10 @@ CObject::~CObject() {
 }
 
 
-void CObject::update(){
+void CObject::update(float TIMESTEP){
+    return;
+}
+
+void CObject::print_all(ostream& out_stream){
     return;
 }

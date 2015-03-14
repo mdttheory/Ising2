@@ -7,17 +7,33 @@
 
 #include "CSimulation.h"
 #include "CObject.h"
+#include "CLattice.h"
+#include "SimulationParametersStruct.cpp"
 
-CSimulation::CSimulation() {
-	m_timestep = 0;
+CSimulation::CSimulation(SimulationParameters *SimPar) {
+
+	m_simPar = SimPar;
+
+	vector<CObject> objects;
+	CLattice lattice(SimPar->WIDTH,SimPar->HEIGHT);
+	objects.push_back(lattice);
+
+
+
+
 }
 
 
 CSimulation::~CSimulation() {
 }
 
-void CSimulation::update(){
-        for (vector<CObject>::iterator it = objects.begin(); it != objects.end(); it++){
-           (*it).update();
-        }
+void CSimulation::run(ostream& debug_stream){
+
+			for (vector<CObject>::iterator it = objects.begin(); it != objects.end(); it++){
+			   (*it).update(m_simPar->TIMESTEP);
+			   (*it).print_all(debug_stream);
+			}
+
+
+		return;
     }
