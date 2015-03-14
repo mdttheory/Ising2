@@ -21,6 +21,7 @@ public:
     CLattice(const unsigned short h, const unsigned short w);
     virtual ~CLattice();
     void print_all(ostream& out_stream);
+    void update(float TIMESTEP);
 private:
     vector<vector<bool> > m_lattice;
     unsigned short m_height;

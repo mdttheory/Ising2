@@ -33,9 +33,13 @@ CLattice::CLattice(const unsigned short h, const unsigned short w) : CObject() {
 CLattice::~CLattice() {
 }
 
+void CLattice::update(float TIMESTEP){
+	return;
+}
 void CLattice::print_all(ostream& out_stream) {
 	const string TRUE_CHAR = " ";
 	const string FALSE_CHAR = "X";
+	cout << "good\n";
 
 	for(unsigned short i = 1; i< m_height+1; i++){
 		string adjust = "";

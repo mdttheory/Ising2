@@ -16,9 +16,12 @@ CObject::~CObject() {
 
 
 void CObject::update(float TIMESTEP){
-    return;
+    cout << "bad1\n";
+	return;
 }
 
 void CObject::print_all(ostream& out_stream){
-    return;
+    cout << "bad2\n";
+	return;
 }
+

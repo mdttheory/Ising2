@@ -23,7 +23,7 @@ public:
 
 private:
     SimulationParameters* m_simPar;
-    vector<CObject> objects;
+    vector<CObject*> m_objects;
 
 };
 

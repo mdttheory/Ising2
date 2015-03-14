@@ -14,9 +14,9 @@ CSimulation::CSimulation(SimulationParameters *SimPar) {
 
 	m_simPar = SimPar;
 
-	vector<CObject> objects;
 	CLattice lattice(SimPar->WIDTH,SimPar->HEIGHT);
-	objects.push_back(lattice);
+	CObject* lattice2 = &lattice;
+	m_objects.push_back(lattice2);
 
 
 
@@ -28,10 +28,9 @@ CSimulation::~CSimulation() {
 }
 
 void CSimulation::run(ostream& debug_stream){
-
-			for (vector<CObject>::iterator it = objects.begin(); it != objects.end(); it++){
-			   (*it).update(m_simPar->TIMESTEP);
-			   (*it).print_all(debug_stream);
+			for (vector<CObject*>::iterator it = m_objects.begin(); it != m_objects.end(); it++){
+			   (*it)->update(m_simPar->TIMESTEP);
+			   (*it)->print_all(debug_stream);
 			}
 
 
