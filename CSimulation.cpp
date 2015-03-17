@@ -30,11 +30,8 @@ void CSimulation::run(ostream& debug_stream, SimulationParameters *SimPar){
 
 	for(short t = 0; t<SimPar->MAXTIMESTEPS;t++)
 	{
-
-		cout << "ran time" << t << endl;
 		for (vector<CObject*>::iterator it = m_objects.begin(); it != m_objects.end(); it++){
 			(*it)->update(m_simPar->TIMESTEP);
-			cout << "ran time2" << t << endl;
 		}
 		for (vector<CObject*>::iterator it2 = m_objects.begin(); it2 != m_objects.end(); it2++){
 			(*it2)->print_all(debug_stream);

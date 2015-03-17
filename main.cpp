@@ -15,9 +15,6 @@
 #include <string.h>
 
 using namespace std;
-
-
-
 /*
  *
  */
@@ -26,14 +23,14 @@ int main(int argc, char** argv) {
 	//output stream for debugging
 	streambuf * buf;
 	ofstream of;
-	char tofile[100] = "data/raw_positions";
+	char tofile[100] = "data/raw_positions.txt";
 	if (false){
 		//set to cout
 		buf = cout.rdbuf();
 	}
 	else{
 		//set to filename
-		of.open("data/raw_positions");
+		of.open("data/raw_positions.txt");
 		buf = of.rdbuf();
 	}
 

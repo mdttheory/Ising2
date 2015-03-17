@@ -40,27 +40,35 @@ void CLattice::update(float TIMESTEP){
 	return;
 }
 void CLattice::print_all(ostream& out_stream) {
-	const string TRUE_CHAR = " ";
-	const string FALSE_CHAR = "X";
-	cout << "ran print" << endl;
+	const string TRUE_CHAR = "1";
+	const string FALSE_CHAR = "0";
+	const bool labels = false;
 
 
 	for(unsigned short i = 1; i< m_height+1; i++){
-		string adjust = "";
+		string newstring = "";
+		if(labels){
+			string adjust = "";
 
-		if (i< 10)adjust = " ";
-		string newstring = adjust + to_string(i);
+			if (i< 10)adjust = " ";
+			string newstring = adjust + to_string(i);
+		}
 
-		string header("  ");
+			string header("  ");
+
 		if (i==1)
 		{
 			for(unsigned short j = 1; j<m_width+1; j++){
-						if(j<10)header+=" ";
-						header+= to_string(j);
-						header += " ";
+						if(labels){
+							if(j<10)header+=" ";
+							header+= to_string(j);
+							header += " ";
+						}
 					}
+			if(labels){
 			header += "\n";
 			out_stream << header;
+			}
 		}
 
 		for(unsigned short j = 1; j<m_width+1; j++){
@@ -70,6 +78,7 @@ void CLattice::print_all(ostream& out_stream) {
 		newstring += "\n";
 		out_stream << newstring;
 	}
+	out_stream << "TIME!\n";
 	return;
 }
 
