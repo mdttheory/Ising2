@@ -34,12 +34,16 @@ CLattice::~CLattice() {
 }
 
 void CLattice::update(float TIMESTEP){
+	short y = rand()%m_height;
+	short x = rand()%m_width;
+	m_lattice[y][x]=!m_lattice[y][x];//flip random bit
 	return;
 }
 void CLattice::print_all(ostream& out_stream) {
 	const string TRUE_CHAR = " ";
 	const string FALSE_CHAR = "X";
-	cout << "good\n";
+	cout << "ran print" << endl;
+
 
 	for(unsigned short i = 1; i< m_height+1; i++){
 		string adjust = "";

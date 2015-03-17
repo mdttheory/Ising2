@@ -10,6 +10,7 @@
 #include <vector>
 #include "CObject.h"
 #include "SimulationParametersStruct.cpp"
+#include "CLattice.h"
 using namespace std;
 
 
@@ -17,8 +18,7 @@ class CSimulation {
 public:
     CSimulation(SimulationParameters *SimPar);
     virtual ~CSimulation();
-
-    void run(ostream& debug_stream);
+    void run(ostream& debug_stream, SimulationParameters *SimPar);
 
 
 private:

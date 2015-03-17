@@ -19,7 +19,7 @@ using namespace std;
 class CLattice : public CObject{
 public:
     CLattice(const unsigned short h, const unsigned short w);
-    virtual ~CLattice();
+    ~CLattice();
     void print_all(ostream& out_stream);
     void update(float TIMESTEP);
 private:
