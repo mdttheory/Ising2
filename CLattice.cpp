@@ -70,10 +70,17 @@ void CLattice::print_all(ostream& out_stream) {
 			out_stream << header;
 			}
 		}
-
-		for(unsigned short j = 1; j<m_width+1; j++){
-			if(m_lattice[i][j])newstring+= " "+TRUE_CHAR+" ";
-			else newstring+= " "+FALSE_CHAR+" ";
+		if(labels){
+			for(unsigned short j = 1; j<m_width+1; j++){
+				if(m_lattice[i][j])newstring+= " "+TRUE_CHAR+" ";
+				else newstring+= " "+FALSE_CHAR+" ";
+			}
+		}
+		else{
+			for(unsigned short j = 0; j<m_width; j++){
+				if(m_lattice[i-1][j])newstring+= " "+TRUE_CHAR+" ";
+				else newstring+= " "+FALSE_CHAR+" ";
+			}
 		}
 		newstring += "\n";
 		out_stream << newstring;

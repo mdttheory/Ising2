@@ -20,6 +20,7 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 	 srand (time(NULL));
+	 cout << "Hello2\n";
 	//output stream for debugging
 	streambuf * buf;
 	ofstream of;
