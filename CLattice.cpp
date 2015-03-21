@@ -37,6 +37,16 @@ void CLattice::update(float TIMESTEP){
 	short y = rand()%m_height;
 	short x = rand()%m_width;
 	m_lattice[y][x]=!m_lattice[y][x];//flip random bit
+
+	// TODO: Create list of nearest neighbors; unique to a specific lattice object
+	// TODO: queue unique to a specific lattice object / resets each timestep?
+	// TODO: Wolff Algorithm
+	/* Choose random site i
+	 * (1) Study neighbor site j.
+	 * 		If s_j = s_i, join site j to cluster with probability p = 1-exp(-2(Beta))
+	 * 			Repeat step (1) on j. (until cluster stops growing)
+	 * 			Invert cluster (actually do this periodically when it's added to the cluster to save comp time)
+	 */
 	return;
 }
 void CLattice::print_all(ostream& out_stream) {
