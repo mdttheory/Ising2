@@ -26,6 +26,7 @@ private:
     vector<vector<bool> > m_lattice;
     unsigned short m_height;
     unsigned short m_width;
+    queue<short> m_queue;
 
 };
 
