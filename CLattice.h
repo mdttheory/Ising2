@@ -11,6 +11,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <queue>
+#include "SimulationParametersStruct.cpp"
 
 #include "CObject.h"
 
@@ -21,12 +23,12 @@ public:
     CLattice(const unsigned short h, const unsigned short w);
     ~CLattice();
     void print_all(ostream& out_stream);
-    void update(float TIMESTEP);
+    void update(SimulationParameters* SimPar);
 private:
     vector<vector<bool> > m_lattice;
     unsigned short m_height;
     unsigned short m_width;
-    queue<short> m_queue;
+    queue<vector<unsigned short>> m_queue;
 
 };
 

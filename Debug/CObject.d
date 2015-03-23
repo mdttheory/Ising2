@@ -1,3 +1,5 @@
-CObject.d: ../CObject.cpp ../CObject.h
+CObject.d: ../CObject.cpp ../CObject.h ../SimulationParametersStruct.cpp
 
 ../CObject.h:
+
+../SimulationParametersStruct.cpp:

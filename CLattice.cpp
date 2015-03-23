@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <string>
+#include <math.h>
 
 using namespace std;
 
@@ -22,25 +23,68 @@ CLattice::CLattice(const unsigned short h, const unsigned short w) : CObject() {
             m_lattice[i].push_back(false);
         }
     }
+
 }
 
 CLattice::~CLattice() {
 }
 
-void CLattice::update(float TIMESTEP){
-	short y = rand()%m_height;
-	short x = rand()%m_width;
-	m_lattice[y][x]=!m_lattice[y][x];//flip random bit
-	// TODO: Create list of nearest neighbors; unique to a specific lattice object
-	// TODO: queue unique to a specific lattice object / resets each timestep? / tuple (x,y) or map single number (1,2,3,4...,N) to x, y?
-	//       2N shorts is small; efficient?
-	// TODO: Wolff Algorithm:
-	/* Choose random site i (done above: x & y)
-	 * (1) Study neighbor site j.
-	 * 		If s_j = s_i, join site j to cluster with probability p = 1-exp(-2(Beta))
-	 * 			Repeat step (1) on j. (until cluster stops growing)
-	 * 			Invert cluster (actually do this periodically when it's added to the cluster to save comp time)
-	 */
+void CLattice::update(SimulationParameters* SimPar){
+
+	unsigned short y = rand()%m_height;
+	unsigned short x = rand()%m_width;
+	bool old_spin = m_lattice[y][x];
+	if(m_lattice[y][x]==old_spin &&
+						float(rand())/float(RAND_MAX)>
+						(1-exp(-2.0*SimPar->COUPLING_CONSTANT/
+						(SimPar->BOLTZMAN_CONSTANT*SimPar->TEMPERATURE)))){
+		m_lattice[y][x] = !old_spin;
+		vector<unsigned short> temp = {y,x};
+		m_queue.push(temp);
+		while (!m_queue.empty())
+		{
+			y = m_queue.front()[0];
+			x = m_queue.front()[1];
+			m_queue.pop();
+			unsigned short newy, newx;
+			for(short i = 0; i<4;i++)
+			{
+				switch(i){
+				case 0:
+					newy = y;
+					if(x==0)newx=m_width-1;
+					else newx = x-1;
+					break;
+				case 1:
+					newy = y;
+					newx = (x+1)%m_width;
+					break;
+				case 2:
+					if(y==0)newy=m_height-1;
+					else newy = y-1;
+					newx = x;
+					break;
+				case 3:
+					newy = (y+1)%m_height;
+					newx = x;
+					break;
+				}
+				if(m_lattice[newy][newx]==old_spin &&
+						float(rand())/float(RAND_MAX)>
+						(1-exp(-2.0*SimPar->COUPLING_CONSTANT/
+						(SimPar->BOLTZMAN_CONSTANT*SimPar->TEMPERATURE))))
+				{
+					m_lattice[newy][newx]=!old_spin;
+					temp.clear();
+					temp.push_back(newy);
+					temp.push_back(newx);
+					m_queue.push(temp);
+				}
+			}
+
+		}
+
+	}
 	return;
 }
 

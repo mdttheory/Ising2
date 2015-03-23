@@ -10,13 +10,14 @@
 #include <fstream>
 #include <streambuf>
 #include <iostream>
+#include "SimulationParametersStruct.cpp"
 using namespace std;
 
 class CObject {
 public:
     CObject();
     virtual ~CObject();
-    virtual void update(float TIMESTEP);
+    virtual void update(SimulationParameters* SimPar);
     virtual void print_all(ostream& out_stream);
 private:
 

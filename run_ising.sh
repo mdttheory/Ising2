@@ -1,5 +1,6 @@
 rm data/*
 rm images/*
+rm spins.gif
 make clean -f ising_makefile
 make ising2.exe -f ising_makefile
 ./ising2.exe

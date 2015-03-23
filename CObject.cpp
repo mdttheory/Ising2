@@ -14,7 +14,7 @@ CObject::CObject() {
 CObject::~CObject() {
 }
 
-void CObject::update(float TIMESTEP){
+void CObject::update(SimulationParameters* SimPar){
     cout << "Called CObject update (bad)\n";
 	return;
 }
