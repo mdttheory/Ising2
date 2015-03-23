@@ -21,28 +21,37 @@ using namespace std;
 int main(int argc, char** argv) {
 	 srand (time(NULL));
 	 cout << "Hello2\n";
-	//output stream for debugging
-	streambuf * buf;
-	ofstream of;
-	char tofile[100] = "data/raw_positions.txt";
+	//output stream for position
+	streambuf * pos_buf;
+	ofstream pos_of;
+	streambuf * mag_buf;
+	ofstream mag_of;
 	if (false){
 		//set to cout
-		buf = cout.rdbuf();
+		pos_buf = cout.rdbuf();
+		mag_buf = cout.rdbuf();
 	}
 	else{
 		//set to filename
-		of.open("data/raw_positions.txt");
-		buf = of.rdbuf();
+		pos_of.open("data/raw_positions.txt");
+		pos_buf = pos_of.rdbuf();
+		mag_of.open("data/mag.txt");
+		mag_buf = mag_of.rdbuf();
 	}
 
 
-	ostream debug_stream(buf);
+	ostream pos_stream(pos_buf);
+	ostream mag_stream(mag_buf);
 	//TODO allow for outputting to file
 	//TODO allow for command line parameters
 
 	SimulationParameters* SimPar = new SimulationParameters();
-	CSimulation Simulation(SimPar);
-	Simulation.run(debug_stream, SimPar);
+	for(float T = SimPar->MIN_TEMP;T<SimPar->MAX_TEMP;T+=SimPar->TEMP_STEP)
+	{
+		SimPar->temperature = T;
+		CSimulation Simulation(SimPar);
+		Simulation.run(pos_stream,mag_stream, SimPar);
+	}
 
 
 

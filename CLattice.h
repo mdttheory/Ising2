@@ -22,7 +22,7 @@ class CLattice : public CObject{
 public:
     CLattice(const unsigned short h, const unsigned short w);
     ~CLattice();
-    void print_all(ostream& out_stream);
+    void print_all(ostream& pos_stream, ostream& mag_stream);
     void update(SimulationParameters* SimPar);
 private:
     vector<vector<bool> > m_lattice;

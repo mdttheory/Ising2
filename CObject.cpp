@@ -19,7 +19,7 @@ void CObject::update(SimulationParameters* SimPar){
 	return;
 }
 
-void CObject::print_all(ostream& out_stream){
+void CObject::print_all(ostream& pos_stream, ostream& mag_stream){
     cout << "Called CObject print_all (bad)\n";
 	return;
 }

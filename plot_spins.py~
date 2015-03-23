@@ -12,6 +12,7 @@ MAXORDERFIGS = 5#maximum number of orders of magnitude of images
 
 def hinton(matrix, i, max_weight=None, ax=None):
 	"""Draw Hinton diagram for visualizing a weight matrix."""
+	plt.clf()
 	ax = ax if ax is not None else plt.gca()
 
 	if not max_weight:
@@ -38,6 +39,8 @@ def hinton(matrix, i, max_weight=None, ax=None):
 
     
 for line in f:
+	if line == "TEMP CHANGED\n":
+		break
 	if line != "TIME!\n":
 		data_aux = []
 		for z in line.split():

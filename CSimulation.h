@@ -18,7 +18,7 @@ class CSimulation {
 public:
     CSimulation(SimulationParameters *SimPar);
     virtual ~CSimulation();
-    void run(ostream& debug_stream, SimulationParameters *SimPar);
+    void run(ostream& pos_stream, ostream& mag_stream, SimulationParameters *SimPar);
 
 
 private:

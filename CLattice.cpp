@@ -37,7 +37,7 @@ void CLattice::update(SimulationParameters* SimPar){
 	if(m_lattice[y][x]==old_spin &&
 						float(rand())/float(RAND_MAX)>
 						(1-exp(-2.0*SimPar->COUPLING_CONSTANT/
-						(SimPar->BOLTZMAN_CONSTANT*SimPar->TEMPERATURE)))){
+						(SimPar->BOLTZMAN_CONSTANT*SimPar->temperature)))){
 		m_lattice[y][x] = !old_spin;
 		vector<unsigned short> temp = {y,x};
 		m_queue.push(temp);
@@ -72,7 +72,7 @@ void CLattice::update(SimulationParameters* SimPar){
 				if(m_lattice[newy][newx]==old_spin &&
 						float(rand())/float(RAND_MAX)>
 						(1-exp(-2.0*SimPar->COUPLING_CONSTANT/
-						(SimPar->BOLTZMAN_CONSTANT*SimPar->TEMPERATURE))))
+						(SimPar->BOLTZMAN_CONSTANT*SimPar->temperature))))
 				{
 					m_lattice[newy][newx]=!old_spin;
 					temp.clear();
@@ -88,10 +88,20 @@ void CLattice::update(SimulationParameters* SimPar){
 	return;
 }
 
-void CLattice::print_all(ostream& out_stream) {
+void CLattice::print_all(ostream& pos_stream, ostream& mag_stream) {
 	const string TRUE_CHAR = "1";
 	const string FALSE_CHAR = "0";
 	const bool labels = false;
+
+	float s = 0;
+	for(unsigned short i = 0; i<m_height; i++){
+	        for(unsigned short j = 0; j<m_width; j++){
+	        	if(m_lattice[i][j])s++;
+	        	else s--;
+	        }
+	    }
+	s/=float(m_width*m_height);
+	mag_stream << s << " ";
 
 	for(unsigned short i = 1; i< m_height+1; i++){
 		string newstring = "";
@@ -113,7 +123,7 @@ void CLattice::print_all(ostream& out_stream) {
 					}
 			if(labels){
 			header += "\n";
-			out_stream << header;
+			pos_stream << header;
 			}
 		}
 		if(labels){
@@ -129,9 +139,9 @@ void CLattice::print_all(ostream& out_stream) {
 			}
 		}
 		newstring += "\n";
-		out_stream << newstring;
+		pos_stream << newstring;
 	}
-	out_stream << "TIME!\n";
+	pos_stream << "TIME!\n";
 	return;
 }
 

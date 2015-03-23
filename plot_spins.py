@@ -39,6 +39,8 @@ def hinton(matrix, i, max_weight=None, ax=None):
 
     
 for line in f:
+	if line == "TEMP CHANGED\n":
+		break
 	if line != "TIME!\n":
 		data_aux = []
 		for z in line.split():
