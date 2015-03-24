@@ -49,6 +49,7 @@ int main(int argc, char** argv) {
 	for(float T = SimPar->MIN_TEMP;T<SimPar->MAX_TEMP;T+=SimPar->TEMP_STEP)
 	{
 		SimPar->temperature = T;
+		cout << "Temperature: " << T << endl;
 		CSimulation Simulation(SimPar);
 		Simulation.run(pos_stream,mag_stream, SimPar);
 	}
