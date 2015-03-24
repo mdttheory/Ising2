@@ -83,7 +83,7 @@ void CLattice::update(SimulationParameters* SimPar){
 	return;
 }
 
-void CLattice::print_all(ostream& pos_stream, ostream& mag_stream) {
+void CLattice::print_all(ostream& pos_stream, ostream& mag_stream, SimulationParameters* SimPar) {
 	const string TRUE_CHAR = "1";
 	const string FALSE_CHAR = "0";
 	const bool labels = false;

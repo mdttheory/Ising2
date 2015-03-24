@@ -18,7 +18,7 @@ struct SimulationParameters
 	float temperature = 2;
 	float BOLTZMAN_CONSTANT = 1;
 	unsigned short PRINT_FREQ = 50000;
-	float MIN_TEMP = 0.2;
+	float MIN_TEMP = 0.5;
 	float MAX_TEMP = 4;
 	float TEMP_STEP = .1;
 	//TODO magnetization vs temp

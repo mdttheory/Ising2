@@ -18,7 +18,7 @@ public:
     CObject();
     virtual ~CObject();
     virtual void update(SimulationParameters* SimPar);
-    virtual void print_all(ostream& pos_stream, ostream& mag_stream);
+    virtual void print_all(ostream& pos_stream, ostream& mag_stream, SimulationParameters* SimPar);
 private:
 
 };
