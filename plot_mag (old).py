@@ -31,6 +31,7 @@ def FIND_MIDPOINT_VAL(data):
 		return data[mid]
 
 
+SLOPE_CUTOFF = 1.0
 
 fig, ax = plt.subplots()
 mag_data = []
@@ -62,6 +63,62 @@ sus_data = FIND_SLOPE(mag_data,temp_data)#temp data is to determine dT
 
 sus_slope_data = FIND_SLOPE(sus_data, temp_data)
 
+
+###find critical temperature
+
+#initialize lists
+downward_slope_pts = [0]
+upward_slope_pts = [0]
+downward_t_pts = [0]
+upward_t_pts = [0]
+downward_sus_pts = [0]
+upward_sus_pts = [0]
+junk,bottom = FIND_MIN_INDEX(sus_data)
+bottom += 1#bottom is the index in TEMP_DATA of the minimum sus
+downward_slope_pts[0]=sus_slope_data[bottom-2]
+upward_slope_pts[0]=downward_slope_pts[0]
+downward_t_pts[0]=temp_data[bottom]
+upward_t_pts[0]=downward_t_pts[0]
+downward_sus_pts[0]=sus_data[bottom]
+upward_sus_pts[0]=downward_sus_pts[0]
+slope=0
+flag_steep = False
+
+#populate lists with ONLY datapts that are on the "steep portion" of the sus vs t plot
+itr = bottom-2#itr is the index in sus_slope_data of the min sus
+for dir in (-1,1):
+	while(abs(slope)>SLOPE_CUTOFF or flag_steep==False):
+		itr += dir
+		slope = sus_slope_data[itr]
+		if dir==1:
+			upward_t_pts.append(temp_data[itr+2])
+			upward_sus_pts.append(sus_data[itr+1])
+			upward_slope_pts.append(sus_slope_data[itr])
+		else:
+			downward_t_pts.append(temp_data[itr+2])
+			downward_sus_pts.append(sus_data[itr+1])
+			downward_slope_pts.append(sus_slope_data[itr])
+		if abs(slope)> SLOPE_CUTOFF:
+			flag_steep = True
+	flag_steep = False
+	itr = bottom-2
+
+print ("upward slope",upward_slope_pts)
+print ("downward slope",downward_slope_pts)
+print ("upward T",upward_t_pts)
+print ("downward T",downward_t_pts)
+print ("upward sus",upward_sus_pts)
+print ("downward sus",downward_sus_pts)
+
+#find y=mx+b for both upward/downward portions of sus vs t
+avg_up_slope = sum(upward_slope_pts)/float(len(upward_slope_pts))
+avg_down_slope = sum(downward_slope_pts)/float(len(downward_slope_pts))
+mid_up_sus = FIND_MIDPOINT_VAL(upward_sus_pts)
+mid_down_sus = FIND_MIDPOINT_VAL(downward_sus_pts)
+
+Tcrit = (mid_down_sus-mid_up_sus)/(avg_up_slope-avg_down_slope)
+print ("Tcrit",Tcrit)
+print (mid_down_sus,mid_up_sus,avg_up_slope,avg_down_slope)
 
 sus_data2=LINEAR_BLUR(sus_data,1)
 

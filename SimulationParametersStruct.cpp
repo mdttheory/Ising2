@@ -11,14 +11,14 @@ struct SimulationParameters
 {
 	const unsigned short WIDTH = 100;
 	const unsigned short HEIGHT = 100;
-	unsigned short MAXTIME = 4000;
+	unsigned short MAXTIME = 3000;
 	float TIMESTEP = 1;
 	unsigned short MAXTIMESTEPS = short(MAXTIME/TIMESTEP);
 	float COUPLING_CONSTANT = 1;
 	float temperature = 2;
 	float BOLTZMAN_CONSTANT = 1;
 	unsigned short PRINT_FREQ = 50000;
-	float MIN_TEMP = 0.5;
+	float MIN_TEMP = 1.5;
 	float MAX_TEMP = 4;
 	float TEMP_STEP = .1;
 	//TODO magnetization vs temp
