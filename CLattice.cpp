@@ -83,20 +83,24 @@ void CLattice::update(SimulationParameters* SimPar){
 	return;
 }
 
+float CLattice::calcMag(){
+	float s = 0;
+		for(unsigned short i = 0; i<m_height; i++){
+		        for(unsigned short j = 0; j<m_width; j++){
+		        	if(m_lattice[i][j])s++;
+		        	else s--;
+		        }
+		    }
+		s/=float(m_width*m_height);
+		return abs(s);
+}
+
 void CLattice::print_all(ostream& pos_stream, ostream& mag_stream, SimulationParameters* SimPar) {
 	const string TRUE_CHAR = "1";
 	const string FALSE_CHAR = "0";
 	const bool labels = false;
 
-	float s = 0;
-	for(unsigned short i = 0; i<m_height; i++){
-	        for(unsigned short j = 0; j<m_width; j++){
-	        	if(m_lattice[i][j])s++;
-	        	else s--;
-	        }
-	    }
-	s/=float(m_width*m_height);
-	mag_stream << abs(s) << " ";
+	mag_stream << calcMag() << " ";
 
 	for(unsigned short i = 1; i< m_height+1; i++){
 		string newstring = "";

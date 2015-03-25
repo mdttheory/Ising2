@@ -24,6 +24,7 @@ public:
     ~CLattice();
     void print_all(ostream& pos_stream, ostream& mag_stream, SimulationParameters* SimPar);
     void update(SimulationParameters* SimPar);
+    float calcMag();
 private:
     vector<vector<bool> > m_lattice;
     unsigned short m_height;

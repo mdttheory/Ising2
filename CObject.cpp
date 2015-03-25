@@ -23,4 +23,8 @@ void CObject::print_all(ostream& pos_stream, ostream& mag_stream, SimulationPara
     cout << "Called CObject print_all (bad)\n";
 	return;
 }
+float CObject::calcMag(){
+	cout << "Called CObject calcMag (bad)\n";
+	return 0.0;
+}
 

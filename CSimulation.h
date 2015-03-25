@@ -20,6 +20,7 @@ public:
     virtual ~CSimulation();
     void run(ostream& pos_stream, ostream& mag_stream, SimulationParameters *SimPar);
     void addObject(CObject* obj);
+    float calcMag();
 
 private:
     SimulationParameters* m_simPar;

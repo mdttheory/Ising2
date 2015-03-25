@@ -12,9 +12,6 @@
 CSimulation::CSimulation(SimulationParameters *SimPar) {
 
 	m_simPar = SimPar;
-	CLattice lattice(SimPar->WIDTH,SimPar->HEIGHT);
-	CObject* lattice2 = &lattice;
-	//m_objects.push_back(lattice2);
 
 }
 
@@ -24,6 +21,14 @@ void CSimulation::addObject(CObject* obj){
 
 
 CSimulation::~CSimulation() {
+}
+
+float CSimulation::calcMag(){
+	float magTot = 0.0;
+	for (vector<CObject*>::iterator it2 = m_objects.begin(); it2 != m_objects.end(); it2++){
+		magTot += (*it2)->calcMag();
+	}
+	return magTot;
 }
 
 void CSimulation::run(ostream& pos_stream, ostream& mag_stream, SimulationParameters *SimPar){
