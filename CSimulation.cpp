@@ -14,8 +14,12 @@ CSimulation::CSimulation(SimulationParameters *SimPar) {
 	m_simPar = SimPar;
 	CLattice lattice(SimPar->WIDTH,SimPar->HEIGHT);
 	CObject* lattice2 = &lattice;
-	m_objects.push_back(lattice2);
+	//m_objects.push_back(lattice2);
 
+}
+
+void CSimulation::addObject(CObject* obj){
+	m_objects.push_back(obj);
 }
 
 
@@ -26,7 +30,7 @@ void CSimulation::run(ostream& pos_stream, ostream& mag_stream, SimulationParame
 
 
 	//mystery line to allow virtual functions to work as they should (this variable is never used)
-	CLattice uselessvariable(m_simPar->WIDTH,m_simPar->HEIGHT);
+	//CLattice uselessvariable(m_simPar->WIDTH,m_simPar->HEIGHT);
 
 	for (vector<CObject*>::iterator it2 = m_objects.begin(); it2 != m_objects.end(); it2++){
 				mag_stream << m_simPar->temperature << "\n";

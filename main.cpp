@@ -50,7 +50,12 @@ int main(int argc, char** argv) {
 	{
 		SimPar->temperature = T;
 		cout << "Temperature: " << T << endl;
+
 		CSimulation Simulation(SimPar);
+		CLattice lattice(SimPar->HEIGHT,SimPar->WIDTH);
+		CObject *lattice2 = &lattice;
+		Simulation.addObject(lattice2);
+
 		Simulation.run(pos_stream,mag_stream, SimPar);
 	}
 

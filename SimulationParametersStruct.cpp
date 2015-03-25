@@ -9,8 +9,8 @@
 
 struct SimulationParameters
 {
-	const unsigned short WIDTH = 100;
-	const unsigned short HEIGHT = 100;
+	const unsigned short WIDTH = 20;
+	const unsigned short HEIGHT = 20;
 	unsigned short MAXTIME = 3000;
 	float TIMESTEP = 1;
 	unsigned short MAXTIMESTEPS = short(MAXTIME/TIMESTEP);

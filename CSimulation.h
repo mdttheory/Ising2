@@ -19,7 +19,7 @@ public:
     CSimulation(SimulationParameters *SimPar);
     virtual ~CSimulation();
     void run(ostream& pos_stream, ostream& mag_stream, SimulationParameters *SimPar);
-
+    void addObject(CObject* obj);
 
 private:
     SimulationParameters* m_simPar;
