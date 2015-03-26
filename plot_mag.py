@@ -55,7 +55,9 @@ f.close()
 
 mag_data2=LINEAR_BLUR(mag_data,1)
 
-plt.plot(temp_data,mag_data2)
+plt.title("magnetization vs temperature")
+#plt.plot(temp_data,mag_data2)
+plt.plot(temp_data,mag_data)
 plt.show()
 
 sus_data = FIND_SLOPE(mag_data,temp_data)#temp data is to determine dT
@@ -65,8 +67,9 @@ sus_slope_data = FIND_SLOPE(sus_data, temp_data)
 
 sus_data2=LINEAR_BLUR(sus_data,1)
 
-plt.plot(temp_data[1:-1],sus_data2)
-#plt.plot(temp_data[1:-1],sus_data)
+plt.title("susceptibility vs temperature")
+#plt.plot(temp_data[1:-1],sus_data2)
+plt.plot(temp_data[1:-1],sus_data)
 
 plt.show()
 
@@ -84,9 +87,11 @@ for i in range(0,len(sus_data)):
 for i in range(0,len(temp_data)):
 	log_temp_data.append(math.log10(temp_data[i]))
 
+plt.title("log magnetization vs log temperature")
 plt.plot(log_temp_data,log_mag_data)
 plt.show()
 
+plt.title("log susceptibility vs log temperature")
 plt.plot(log_temp_data[1:-1],log_sus_data)
 plt.show()
 

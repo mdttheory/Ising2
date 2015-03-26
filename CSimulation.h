@@ -21,6 +21,7 @@ public:
     void run(ostream& pos_stream, ostream& mag_stream, SimulationParameters *SimPar);
     void addObject(CObject* obj);
     float calcMag();
+    float calcEnergy();
 
 private:
     SimulationParameters* m_simPar;

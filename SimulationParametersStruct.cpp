@@ -20,8 +20,8 @@ struct SimulationParameters
 	unsigned short PRINT_FREQ = 50000;
 	float MIN_TEMP = 1;
 	float MAX_TEMP = 4;
-	float TEMP_STEP = .05;
-	bool CRIT_MODE = true;
+	float TEMP_STEP = .1;
+	bool CRIT_MODE = false;
 	unsigned short CRIT_REPEATS = 10;
 	//TODO magnetization vs temp
 	// T critical

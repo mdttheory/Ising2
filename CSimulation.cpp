@@ -31,8 +31,15 @@ float CSimulation::calcMag(){
 	return magTot;
 }
 
-void CSimulation::run(ostream& pos_stream, ostream& mag_stream, SimulationParameters *SimPar){
+float CSimulation::calcEnergy(){
+	float enTot = 0.0;
+	for (vector<CObject*>::iterator it2 = m_objects.begin(); it2 != m_objects.end(); it2++){
+		enTot += (*it2)->calcEnergy();
+	}
+	return enTot;
+}
 
+void CSimulation::run(ostream& pos_stream, ostream& mag_stream, SimulationParameters *SimPar){
 
 	//mystery line to allow virtual functions to work as they should (this variable is never used)
 	//CLattice uselessvariable(m_simPar->WIDTH,m_simPar->HEIGHT);

@@ -27,4 +27,8 @@ float CObject::calcMag(){
 	cout << "Called CObject calcMag (bad)\n";
 	return 0.0;
 }
+float CObject::calcEnergy(){
+	cout << "Called CObject calcEnergy (bad)\n";
+	return 0.0;
+}
 

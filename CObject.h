@@ -20,6 +20,7 @@ public:
     virtual void update(SimulationParameters* SimPar);
     virtual void print_all(ostream& pos_stream, ostream& mag_stream, SimulationParameters* SimPar);
     virtual float calcMag();
+    virtual float calcEnergy();
 private:
 
 };

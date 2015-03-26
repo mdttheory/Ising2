@@ -26,10 +26,13 @@ int main(int argc, char** argv) {
 	ofstream pos_of;
 	streambuf * mag_buf;
 	ofstream mag_of;
+	streambuf * en_buf;
+	ofstream en_of;
 	if (false){
 		//set to cout
 		pos_buf = cout.rdbuf();
 		mag_buf = cout.rdbuf();
+		en_buf = cout.rdbuf();
 	}
 	else{
 		//set to filename
@@ -37,11 +40,14 @@ int main(int argc, char** argv) {
 		pos_buf = pos_of.rdbuf();
 		mag_of.open("data/mag.txt");
 		mag_buf = mag_of.rdbuf();
+		en_of.open("data/energy.txt");
+		en_buf = en_of.rdbuf();
 	}
 
 
 	ostream pos_stream(pos_buf);
 	ostream mag_stream(mag_buf);
+	ostream en_stream(en_buf);
 	//TODO allow for outputting to file
 	//TODO allow for command line parameters
 
@@ -51,21 +57,24 @@ int main(int argc, char** argv) {
 	if(SimPar->CRIT_MODE){
 		float TempCritsAvg;
 		for(unsigned short r =0;r<SimPar->CRIT_REPEATS;r++){
-			cout << "Repeat: " << r << "/" << SimPar->CRIT_REPEATS << "\n";
+			cout << "\nRepeat: " << r << "/" << SimPar->CRIT_REPEATS << "\n";
 			vector<float> mags;
 			for(float T = SimPar->MIN_TEMP;T<SimPar->MAX_TEMP;T+=SimPar->TEMP_STEP){
 				cout << "Temperature: " << T << endl;
 				SimPar->temperature = T;
 
 				CSimulation Simulation(SimPar);
-				CLattice lattice(SimPar->HEIGHT,SimPar->WIDTH);
+				CLattice lattice(SimPar->HEIGHT,SimPar->WIDTH, SimPar->COUPLING_CONSTANT);
 				CObject *lattice2 = &lattice;
 				Simulation.addObject(lattice2);
 
 				Simulation.run(pos_stream,mag_stream, SimPar);
 				mags.push_back(Simulation.calcMag());
+				//cout << "Final Energy: " << Simulation.calcEnergy() << "\n";
 
 			}
+
+			//calculate crit temp
 			unsigned short min_sus_idx = 0;//index in terms of mag
 			float min_sus = numeric_limits<float>::infinity();
 			for(unsigned short i = 1; i<mags.size()-1;i++){
@@ -80,19 +89,24 @@ int main(int argc, char** argv) {
 		}
 		TempCritsAvg/=SimPar->CRIT_REPEATS;
 		cout << "Final Average Critical Temp: " << TempCritsAvg << endl;
+
 	}
 	else{
 		for(float T = SimPar->MIN_TEMP;T<SimPar->MAX_TEMP;T+=SimPar->TEMP_STEP)
 		{
 			SimPar->temperature = T;
-			cout << "Temperature: " << T << endl;
+			cout << "\nTemperature: " << T << endl;
+			en_stream << T << "\n";
 
 			CSimulation Simulation(SimPar);
-			CLattice lattice(SimPar->HEIGHT,SimPar->WIDTH);
+			CLattice lattice(SimPar->HEIGHT,SimPar->WIDTH, SimPar->COUPLING_CONSTANT);
 			CObject *lattice2 = &lattice;
 			Simulation.addObject(lattice2);
 
 			Simulation.run(pos_stream,mag_stream, SimPar);
+			float energy = Simulation.calcEnergy();
+			cout << "Final Energy: " << energy << "\n";
+			en_stream << energy << "\n";
 		}
 	}
 
