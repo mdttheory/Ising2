@@ -30,6 +30,27 @@ unsigned int calc_timesteps(SimulationParameters *SimPar)
 	return t;
 }
 
+void print_header(SimulationParameters *SimPar, ostream &head_stream)
+{
+	head_stream << "Simulation Parameters\n";
+	head_stream << SimPar->WIDTH  << " WIDTH \n";
+	head_stream << SimPar->HEIGHT  << " HEIGHT \n";
+	head_stream << SimPar->MAXTIME  << " MAXTIME\n";
+	head_stream << SimPar->TIMESTEP  << " TIMESTEP\n";
+	head_stream << SimPar->MAXTIMESTEPS  << " MAXTIMESTEPS\n";
+	head_stream << SimPar->COUPLING_CONSTANT  << " COUPLING_CONSTANT\n";
+	head_stream << SimPar->temperature  << " temperature\n";
+	head_stream << SimPar->BOLTZMAN_CONSTANT  << " BOLTZMAN_CONSTANT\n";
+	head_stream << SimPar->PRINT_FREQ  << " PRINT_FREQ\n";
+	head_stream << SimPar->MIN_TEMP  << " MIN_TEMP\n";
+	head_stream << SimPar->MAX_TEMP  << " MAX_TEMP\n";
+	head_stream << SimPar->TEMP_STEP  << " TEMP_STEP\n";
+	head_stream << SimPar->CRIT_MODE  << " CRIT_MODE\n";
+	head_stream << SimPar->CRIT_REPEATS  << " CRIT_REPEATS\n";
+	head_stream << SimPar->var_timestep  << " var_timestep\n";
+	return;
+}
+
 int main(int argc, char** argv) {
 	 srand (time(NULL));
 	//output stream for position
@@ -39,11 +60,14 @@ int main(int argc, char** argv) {
 	ofstream mag_of;
 	streambuf * en_buf;
 	ofstream en_of;
+	streambuf * head_buf;
+	ofstream head_of;
 	if (false){
 		//set to cout
 		pos_buf = cout.rdbuf();
 		mag_buf = cout.rdbuf();
 		en_buf = cout.rdbuf();
+		head_buf = cout.rdbuf();
 	}
 	else{
 		//set to filename
@@ -53,17 +77,23 @@ int main(int argc, char** argv) {
 		mag_buf = mag_of.rdbuf();
 		en_of.open("data/energy.txt");
 		en_buf = en_of.rdbuf();
+		head_of.open("data/parameters.txt");
+		head_buf = head_of.rdbuf();
 	}
 
 
 	ostream pos_stream(pos_buf);
 	ostream mag_stream(mag_buf);
 	ostream en_stream(en_buf);
+	ostream head_stream(head_buf);
 	//TODO allow for outputting to file
 	//TODO allow for command line parameters
 
 
 	SimulationParameters* SimPar = new SimulationParameters();
+
+	print_header(SimPar, head_stream);
+	head_of.close();
 
 	if(SimPar->CRIT_MODE){
 		float TempCritsAvg;
@@ -82,6 +112,9 @@ int main(int argc, char** argv) {
 				Simulation.addObject(lattice2);
 
 				Simulation.run(pos_stream,mag_stream, SimPar);
+				pos_of.flush();
+				mag_of.flush();
+				en_of.flush();
 				mags.push_back(Simulation.calcMag());
 				//cout << "Final Energy: " << Simulation.calcEnergy() << "\n";
 
@@ -119,14 +152,14 @@ int main(int argc, char** argv) {
 			Simulation.addObject(lattice2);
 
 			Simulation.run(pos_stream,mag_stream, SimPar);
+			pos_of.flush();
+			mag_of.flush();
+			en_of.flush();
 			float energy = Simulation.calcEnergy();
 			cout << "Final Energy: " << energy << "\n";
 			en_stream << energy << "\n";
 		}
 	}
-
-
-
 	delete SimPar;
     return 0;
 }
