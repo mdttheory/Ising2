@@ -13,16 +13,17 @@ struct SimulationParameters
 	const unsigned short HEIGHT = 100;
 	unsigned short MAXTIME = 3000;
 	float TIMESTEP = 1;
-	unsigned short MAXTIMESTEPS = short(MAXTIME/TIMESTEP);
+	unsigned int MAXTIMESTEPS = short(MAXTIME/TIMESTEP);
 	float COUPLING_CONSTANT = 1;
 	float temperature = 2;
 	float BOLTZMAN_CONSTANT = 1;
-	unsigned short PRINT_FREQ = 50000;
+	unsigned int PRINT_FREQ = 50000;
 	float MIN_TEMP = 1;
-	float MAX_TEMP = 4;
+	float MAX_TEMP = 5;
 	float TEMP_STEP = .1;
 	bool CRIT_MODE = false;
 	unsigned short CRIT_REPEATS = 10;
+	bool var_timestep = true;
 	//TODO magnetization vs temp
 	// T critical
 	// Susceptibility (d<m>/dT)

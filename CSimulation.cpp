@@ -10,9 +10,7 @@
 #include "SimulationParametersStruct.cpp"
 
 CSimulation::CSimulation(SimulationParameters *SimPar) {
-
 	m_simPar = SimPar;
-
 }
 
 void CSimulation::addObject(CObject* obj){
@@ -49,7 +47,7 @@ void CSimulation::run(ostream& pos_stream, ostream& mag_stream, SimulationParame
 				(*it2)->print_all(pos_stream, mag_stream, m_simPar);
 			}
 
-	for(unsigned short t = 0; t<m_simPar->MAXTIMESTEPS;t++)
+	for(unsigned int t = 0; t<m_simPar->MAXTIMESTEPS;t++)
 	{
 		for (vector<CObject*>::iterator it = m_objects.begin(); it != m_objects.end(); it++){
 			(*it)->update(m_simPar);

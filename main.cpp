@@ -19,6 +19,17 @@ using namespace std;
 /*
  *
  */
+
+unsigned int calc_timesteps(SimulationParameters *SimPar)
+{
+	unsigned int t = 1;
+	t *= SimPar->HEIGHT;
+	t *= SimPar->WIDTH;
+	t *= SimPar->temperature;
+	t /= 2;
+	return t;
+}
+
 int main(int argc, char** argv) {
 	 srand (time(NULL));
 	//output stream for position
@@ -63,6 +74,8 @@ int main(int argc, char** argv) {
 				cout << "Temperature: " << T << endl;
 				SimPar->temperature = T;
 
+				SimPar->MAXTIMESTEPS=calc_timesteps(SimPar);
+				cout << "MAXTIMESTEPS = " << SimPar->MAXTIMESTEPS << "\n";
 				CSimulation Simulation(SimPar);
 				CLattice lattice(SimPar->HEIGHT,SimPar->WIDTH, SimPar->COUPLING_CONSTANT);
 				CObject *lattice2 = &lattice;
@@ -98,6 +111,8 @@ int main(int argc, char** argv) {
 			cout << "\nTemperature: " << T << endl;
 			en_stream << T << "\n";
 
+			SimPar->MAXTIMESTEPS=calc_timesteps(SimPar);
+			cout << "MAXTIMESTEPS = " << SimPar->MAXTIMESTEPS << "\n";
 			CSimulation Simulation(SimPar);
 			CLattice lattice(SimPar->HEIGHT,SimPar->WIDTH, SimPar->COUPLING_CONSTANT);
 			CObject *lattice2 = &lattice;
