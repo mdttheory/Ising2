@@ -104,7 +104,7 @@ int main(int argc, char** argv) {
 				cout << "Temperature: " << T << endl;
 				SimPar->temperature = T;
 
-				SimPar->MAXTIMESTEPS=calc_timesteps(SimPar);
+				//TODO SimPar->MAXTIMESTEPS=calc_timesteps(SimPar);
 				cout << "MAXTIMESTEPS = " << SimPar->MAXTIMESTEPS << "\n";
 				CSimulation Simulation(SimPar);
 				CLattice lattice(SimPar->HEIGHT,SimPar->WIDTH, SimPar->COUPLING_CONSTANT);
@@ -144,7 +144,7 @@ int main(int argc, char** argv) {
 			cout << "\nTemperature: " << T << endl;
 			en_stream << T << "\n";
 
-			SimPar->MAXTIMESTEPS=calc_timesteps(SimPar);
+			//TODO SimPar->MAXTIMESTEPS=calc_timesteps(SimPar);
 			cout << "MAXTIMESTEPS = " << SimPar->MAXTIMESTEPS << "\n";
 			CSimulation Simulation(SimPar);
 			CLattice lattice(SimPar->HEIGHT,SimPar->WIDTH, SimPar->COUPLING_CONSTANT);

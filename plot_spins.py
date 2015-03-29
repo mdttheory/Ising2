@@ -34,7 +34,7 @@ def hinton(matrix, i, max_weight=None, ax=None):
 			ax.add_patch(rect)
 
 	ax.autoscale_view()
-	numdigits = int(math.ceil(math.log10(i)))
+	numdigits = int(math.ceil(math.log10(i+1)))
 	plt.savefig('images/SpinData'+('0'*(MAXORDERFIGS-numdigits))+str(i)+'.png', bbox_inches='tight')
 
     
